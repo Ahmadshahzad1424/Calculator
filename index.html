@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+        }
+
+        .calculator {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 90%;
+            max-width: 350px;
+        }
+
+        input {
+            grid-column: span 4;
+            height: 80px;
+            background: transparent;
+            color: white;
+            font-size: 36px;
+            text-align: right;
+            padding: 10px;
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.398);
+        }
+
+        button {
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            font-size: 22px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 3px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        button:active {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0.95);
+        }
+
+        .operator {
+            color: #ffcc00;
+        }
+
+        .equal {
+            grid-column: span 2;
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+        }
+
+        @media (max-width: 400px) {
+            .calculator {
+                gap: 8px;
+            }
+
+            button {
+                height: 60px;
+                font-size: 18px;
+            }
+
+            input {
+                height: 70px;
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="output-screen" placeholder="0" readonly autocomplete="off">
+        <button class="operator" onclick="Clear()">C</button>
+        <button class="operator" onclick="del()">DEL</button>
+        <button class="operator" onclick="display('%')">%</button>
+        <button class="operator" onclick="display('/')">/</button>
+        <button onclick="display('7')">7</button>
+        <button onclick="display('8')">8</button>
+        <button onclick="display('9')">9</button>
+        <button class="operator" onclick="display('*')">×</button>
+        <button onclick="display('4')">4</button>
+        <button onclick="display('5')">5</button>
+        <button onclick="display('6')">6</button>
+        <button class="operator" onclick="display('-')">−</button>
+        <button onclick="display('1')">1</button>
+        <button onclick="display('2')">2</button>
+        <button onclick="display('3')">3</button>
+        <button class="operator" onclick="display('+')">+</button>
+        <button onclick="display('0')">0</button>
+        <button onclick="display('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        let output = document.getElementById("output-screen");
+
+        function display(num) {
+            output.value += num;
+        }
+
+        function calculate() {
+            try {
+                output.value = eval(output.value);
+            } catch (error) {
+                output.value = "Error";
+            }
+        }
+
+        function Clear() {
+            output.value = "";
+        }
+
+        function del() {
+            output.value = output.value.slice(0, -1);
+        }
+    </script>
+</body>
+
+</html>
